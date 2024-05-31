@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  nestjs_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ofood
+    ports:
+      - '3000:3000'
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: root
+      DB_PASSWORD: password
+      DB_NAME: ofood
+
+  postgres:
+    image: postgres:latest
+    container_name: ofood_db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ofood
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+    driver: local
