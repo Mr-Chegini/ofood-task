@@ -20,7 +20,7 @@ export class Feedback extends BaseEntity {
   @ManyToOne(() => Store)
   store_id: Store;
 
-  @Column({ type: 'enum' })
+  @Column({ type: 'enum', enum: FeedbackType })
   type: FeedbackType;
 
   @Column({ type: 'int2' })
