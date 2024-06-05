@@ -32,6 +32,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           database: config.get<string>('DB_NAME'),
           synchronize: true,
           autoLoadEntities: true,
+          extra: {
+            connectionLimit: 500,
+          },
         };
       },
     }),
