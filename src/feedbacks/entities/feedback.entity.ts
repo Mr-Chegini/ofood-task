@@ -7,6 +7,7 @@ import {
   BaseEntity,
   PrimaryGeneratedColumn,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 @Entity()
@@ -15,10 +16,12 @@ export class Feedback extends BaseEntity {
   id: number;
 
   @ManyToOne(() => Order)
-  order_id: Order;
+  @JoinColumn({ name: 'order_id' })
+  order: Order;
 
   @ManyToOne(() => Store)
-  store_id: Store;
+  @JoinColumn({ name: 'store_id' })
+  store: Store;
 
   @Column({ type: 'enum', enum: FeedbackType })
   type: FeedbackType;
@@ -26,6 +29,6 @@ export class Feedback extends BaseEntity {
   @Column({ type: 'int2' })
   rating: number;
 
-  @Column()
+  @Column({ nullable: true })
   comment: string;
 }
